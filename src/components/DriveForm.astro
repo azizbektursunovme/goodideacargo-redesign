@@ -2,7 +2,6 @@
 // Drive with Us application: one column on every screen. Sends JSON to PUBLIC_DRIVE_ENDPOINT.
 // Asks for no license number, SSN or medical card: recruiting collects documents after the first call.
 import LeadForm from './LeadForm.astro';
-import Icon from './Icon.astro';
 import { driverRoles, cdlOptions, experienceOptions } from '../data/site';
 
 const endpoint = import.meta.env.PUBLIC_DRIVE_ENDPOINT ?? '';
@@ -28,17 +27,17 @@ const endpoint = import.meta.env.PUBLIC_DRIVE_ENDPOINT ?? '';
     <div class="form-grid">
       <div class="field">
         <label class="label" for="d-name">Full name</label>
-        <div class="input-wrap"><Icon name="user" /><input class="input" id="d-name" name="name" autocomplete="name" required minlength="2" data-msg="Enter your full name." aria-describedby="d-name-err" /></div>
+        <input class="input" id="d-name" name="name" autocomplete="name" required minlength="2" data-msg="Enter your full name." aria-describedby="d-name-err" />
         <p class="field-error" id="d-name-err"></p>
       </div>
       <div class="field">
         <label class="label" for="d-email">Email</label>
-        <div class="input-wrap"><Icon name="mail" /><input class="input" id="d-email" name="email" type="email" autocomplete="email" required placeholder="name@example.com" data-msg="Enter an email address like name@example.com." aria-describedby="d-email-err" /></div>
+        <input class="input" id="d-email" name="email" type="email" autocomplete="email" required placeholder="name@example.com" data-msg="Enter an email address like name@example.com." aria-describedby="d-email-err" />
         <p class="field-error" id="d-email-err"></p>
       </div>
       <div class="field">
         <label class="label" for="d-phone">Phone</label>
-        <div class="input-wrap"><Icon name="phone" /><input class="input" id="d-phone" name="phone" type="tel" autocomplete="tel" required pattern="[0-9()+.\s-]{10,20}" placeholder="(206) 555-0100" data-msg="Enter a phone number with area code." aria-describedby="d-phone-err" /></div>
+        <input class="input" id="d-phone" name="phone" type="tel" autocomplete="tel" required pattern="[0-9()+.\s-]{10,20}" placeholder="(206) 555-0100" data-msg="Enter a phone number with area code." aria-describedby="d-phone-err" />
         <p class="field-error" id="d-phone-err"></p>
       </div>
     </div>
@@ -78,8 +77,8 @@ const endpoint = import.meta.env.PUBLIC_DRIVE_ENDPOINT ?? '';
         <p class="field-error" id="d-exp-err"></p>
       </div>
       <div class="field">
-        <label class="label" for="d-message">Anything else? <span class="opt">(optional)</span></label>
-        <div class="input-wrap input-wrap--top"><Icon name="note" /><textarea class="input" id="d-message" name="message" rows="3" placeholder="Equipment, lanes you like, when you can start"></textarea></div>
+        <label class="label" for="d-message">Anything else? <span class="opt">Optional</span></label>
+        <textarea class="input" id="d-message" name="message" rows="3" placeholder="Equipment, lanes you like, when you can start"></textarea>
       </div>
       <div class="field consents">
         <label class="consent"><input type="checkbox" name="smsConsent" value="yes" /><span>Text me about my application <span class="opt">(optional)</span>. Message and data rates may apply. Reply STOP to opt out. Consent is not required to apply.</span></label>

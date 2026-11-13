@@ -2,7 +2,6 @@
 // Shipper quote request: the lead the Meta campaign is built around.
 // Sends JSON to PUBLIC_QUOTE_ENDPOINT through LeadForm; "sent" only after the server answers 2xx.
 import LeadForm from './LeadForm.astro';
-import Icon from './Icon.astro';
 import { serviceOptions, freightOptions } from '../data/site';
 
 const endpoint = import.meta.env.PUBLIC_QUOTE_ENDPOINT ?? '';
@@ -29,12 +28,12 @@ const endpoint = import.meta.env.PUBLIC_QUOTE_ENDPOINT ?? '';
     <div class="form-grid form-grid--2">
       <div class="field">
         <label class="label" for="q-pickup">Pickup city or ZIP</label>
-        <div class="input-wrap"><Icon name="origin" /><input class="input" id="q-pickup" name="pickup" required autocomplete="off" placeholder="Renton, WA 98057" data-msg="Enter the pickup city or ZIP code." aria-describedby="q-pickup-err" /></div>
+        <input class="input" id="q-pickup" name="pickup" required autocomplete="off" placeholder="Renton, WA 98057" data-msg="Enter the pickup city or ZIP code." aria-describedby="q-pickup-err" />
         <p class="field-error" id="q-pickup-err"></p>
       </div>
       <div class="field">
         <label class="label" for="q-delivery">Delivery city or ZIP</label>
-        <div class="input-wrap"><Icon name="pin" /><input class="input" id="q-delivery" name="delivery" required autocomplete="off" placeholder="Phoenix, AZ 85001" data-msg="Enter the delivery city or ZIP code." aria-describedby="q-delivery-err" /></div>
+        <input class="input" id="q-delivery" name="delivery" required autocomplete="off" placeholder="Phoenix, AZ 85001" data-msg="Enter the delivery city or ZIP code." aria-describedby="q-delivery-err" />
         <p class="field-error" id="q-delivery-err"></p>
       </div>
       <div class="field">
@@ -59,13 +58,13 @@ const endpoint = import.meta.env.PUBLIC_QUOTE_ENDPOINT ?? '';
         <p class="field-error" id="q-freight-err"></p>
       </div>
       <div class="field">
-        <label class="label" for="q-weight">Estimated weight <span class="opt">(optional)</span></label>
-        <div class="input-wrap input-wrap--suffix"><Icon name="weight" /><input class="input" id="q-weight" name="weightLbs" type="number" inputmode="numeric" min="1" max="80000" placeholder="40000" data-msg="Enter the weight in pounds, up to 80,000." aria-describedby="q-weight-err" /><span class="suffix">lbs</span></div>
+        <label class="label" for="q-weight">Estimated weight <span class="opt">Optional</span></label>
+        <div class="input-wrap input-wrap--suffix"><input class="input" id="q-weight" name="weightLbs" type="number" inputmode="numeric" min="1" max="80000" placeholder="40000" data-msg="Enter the weight in pounds, up to 80,000." aria-describedby="q-weight-err" /><span class="suffix">lbs</span></div>
         <p class="field-error" id="q-weight-err"></p>
       </div>
       <div class="field span-2">
-        <label class="label" for="q-notes">Notes <span class="opt">(optional)</span></label>
-        <div class="input-wrap input-wrap--top"><Icon name="note" /><textarea class="input" id="q-notes" name="notes" rows="3" placeholder="Pallet count, dock hours, appointment, recurring lane"></textarea></div>
+        <label class="label" for="q-notes">Notes <span class="opt">Optional</span></label>
+        <textarea class="input" id="q-notes" name="notes" rows="3" placeholder="Pallet count, dock hours, appointment, recurring lane"></textarea>
       </div>
     </div>
   </fieldset>
@@ -81,21 +80,21 @@ const endpoint = import.meta.env.PUBLIC_QUOTE_ENDPOINT ?? '';
     <div class="form-grid form-grid--2">
       <div class="field">
         <label class="label" for="q-name">Full name</label>
-        <div class="input-wrap"><Icon name="user" /><input class="input" id="q-name" name="name" autocomplete="name" required minlength="2" data-msg="Enter your full name." aria-describedby="q-name-err" /></div>
+        <input class="input" id="q-name" name="name" autocomplete="name" required minlength="2" data-msg="Enter your full name." aria-describedby="q-name-err" />
         <p class="field-error" id="q-name-err"></p>
       </div>
       <div class="field">
-        <label class="label" for="q-company">Company <span class="opt">(optional)</span></label>
-        <div class="input-wrap"><Icon name="building" /><input class="input" id="q-company" name="company" autocomplete="organization" /></div>
+        <label class="label" for="q-company">Company <span class="opt">Optional</span></label>
+        <input class="input" id="q-company" name="company" autocomplete="organization" />
       </div>
       <div class="field">
         <label class="label" for="q-email">Email</label>
-        <div class="input-wrap"><Icon name="mail" /><input class="input" id="q-email" name="email" type="email" autocomplete="email" required placeholder="name@company.com" data-msg="Enter an email address like name@company.com." aria-describedby="q-email-err" /></div>
+        <input class="input" id="q-email" name="email" type="email" autocomplete="email" required placeholder="name@company.com" data-msg="Enter an email address like name@company.com." aria-describedby="q-email-err" />
         <p class="field-error" id="q-email-err"></p>
       </div>
       <div class="field">
         <label class="label" for="q-phone">Phone</label>
-        <div class="input-wrap"><Icon name="phone" /><input class="input" id="q-phone" name="phone" type="tel" autocomplete="tel" required pattern="[0-9()+.\s-]{10,20}" placeholder="(206) 555-0100" data-msg="Enter a phone number with area code." aria-describedby="q-phone-err" /></div>
+        <input class="input" id="q-phone" name="phone" type="tel" autocomplete="tel" required pattern="[0-9()+.\s-]{10,20}" placeholder="(206) 555-0100" data-msg="Enter a phone number with area code." aria-describedby="q-phone-err" />
         <p class="field-error" id="q-phone-err"></p>
       </div>
       <div class="field span-2 consents">

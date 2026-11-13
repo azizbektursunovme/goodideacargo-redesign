@@ -1,7 +1,6 @@
 ---
 // Contact message. Sends JSON to PUBLIC_CONTACT_ENDPOINT through LeadForm.
 import LeadForm from './LeadForm.astro';
-import Icon from './Icon.astro';
 import { url } from '../lib/url';
 
 const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
@@ -36,17 +35,17 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
       </div>
       <div class="field">
         <label class="label" for="m-email">Email</label>
-        <div class="input-wrap"><Icon name="mail" /><input class="input" id="m-email" name="email" type="email" autocomplete="email" required placeholder="name@company.com" data-msg="Enter an email address like name@company.com." aria-describedby="m-email-err" /></div>
+        <input class="input" id="m-email" name="email" type="email" autocomplete="email" required placeholder="name@company.com" data-msg="Enter an email address like name@company.com." aria-describedby="m-email-err" />
         <p class="field-error" id="m-email-err"></p>
       </div>
       <div class="field">
-        <label class="label" for="m-phone">Phone <span class="opt">(optional)</span></label>
-        <div class="input-wrap"><Icon name="phone" /><input class="input" id="m-phone" name="phone" type="tel" autocomplete="tel" pattern="[0-9()+.\s-]{10,20}" placeholder="(206) 555-0100" data-msg="Enter a phone number with area code, or leave it empty." aria-describedby="m-phone-err" /></div>
+        <label class="label" for="m-phone">Phone <span class="opt">Optional</span></label>
+        <input class="input" id="m-phone" name="phone" type="tel" autocomplete="tel" pattern="[0-9()+.\s-]{10,20}" placeholder="(206) 555-0100" data-msg="Enter a phone number with area code, or leave it empty." aria-describedby="m-phone-err" />
         <p class="field-error" id="m-phone-err"></p>
       </div>
       <div class="field span-2">
-        <label class="label" for="m-company">Company <span class="opt">(optional)</span></label>
-        <div class="input-wrap"><Icon name="building" /><input class="input" id="m-company" name="company" autocomplete="organization" /></div>
+        <label class="label" for="m-company">Company <span class="opt">Optional</span></label>
+        <input class="input" id="m-company" name="company" autocomplete="organization" />
       </div>
       <div class="field span-2">
         <label class="label" for="m-message">Message</label>

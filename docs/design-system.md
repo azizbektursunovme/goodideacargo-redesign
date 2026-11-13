@@ -27,6 +27,7 @@ Kulranglar soni: **4** (task: "ko'pi bilan 3–4"). To'q fonda kulrang o'rniga o
 - **Bitta radius:** 12px (tugmalar, kartalar, inputlar, rasmlar, header).
 - **Bitta tugma (minimal):** yashil fon, oq matn, 1px chegara, 500 qalinlik, soyasiz; 46px (katta: 52px) (`.btn`). Ikkinchi darajali variant faqat ingichka konturli (`.btn--outline`), hover'da yengil fon.
 - **Bosish animatsiyasi:** tugma 0.96 ga kichrayadi va qo'yib yuborilganda yumshoq "prujina" bilan qaytadi; bosilgan nuqtadan och to'lqin tarqaladi (klaviaturada markazdan). Forma yuborilayotganda tugmada kichik spinner. `prefers-reduced-motion` yoqilgan bo'lsa animatsiya o'chadi.
+- **Forma maydonlari:** tugma bilan bir xil: 1px chegara (oq fonda 3:1), radius 12px, 48px, ikonkasiz; hover'da chegara to'qlashadi, fokusda yashil chegara va yengil halqa, xatoda qizil. "Optional" yorlig'i label o'ng tomonida. Faqat og'irlik maydonida "lbs" qo'shimchasi.
 - Header: telefonda to'q ko'k qat'iy panel (64px); 1100px'dan katta ekranda eski saytdagidek suzuvchi, shaffof, scroll'da to'qlashadi.
 - Hero: to'liq ekranli haqiqiy surat (I-90, Snoqualmie Pass, Vashington), chapdan qorong'i soya, "Reliable Trucking Services / Across the USA".
 - Ichki sahifalar: suratli to'q banner + sarlavha + breadcrumb (eski saytdagidek).

@@ -7,15 +7,13 @@ Bu alohida repo; asosiy saytga ko'chirish dasturchi bilan kelishiladi.
 - Ko'rish havolasi: https://azizbektursunovme.github.io/goodideacargo-redesign/
 - Repo: https://github.com/azizbektursunovme/goodideacargo-redesign
 
-## Dizayn yo'nalishi: "Guide sign"
+## Dizayn: hozirgi sayt ko'rinishi saqlangan
 
-Boshqa sister saytlardan farqli, kreativ yo'nalish: AQSh avtomagistral yo'l belgilari.
-- Hero: yo'l ustidagi gantry'ga osilgan katta yashil belgi (I-5 / I-90 belgilari, "Freight to all 48 states"), orqada I-90 Snoqualmie dovonidagi yuk mashinalari.
-- Yagona tugma uslubi: sariq "exit only" plastinka. Ikkinchi darajali harakatlar oddiy havola.
-- Shrift: Overpass (Highway Gothic'dan kelib chiqqan, OFL), bitta oila, o'zimizda (39 KB).
-- Ranglar: belgi yashili `#0B6B3A`, sariq `#FFC72C`, to'q yashil `#0E2A1D`, oq va **aynan 4 ta kulrang**. Bitta radius: 6px. Soya yo'q.
-- Qadamlar raqamlari mile-marker (yashil ustuncha) ko'rinishida; sahifa sarlavhalari yashil belgi plastinkasida.
-- Suratlar: Vashington shtati yo'llari (Snoqualmie Pass, North Bend, Rainier), vaqtinchalik, mualliflari Terms of Use sahifasi oxirida.
+Rahbar qarori: goodideacargo.com'ning hozirgi ko'rinishi qoladi. Eski kod qo'limizda yo'qligi uchun ko'rinish eski saytning CSS'i asosida qayta yig'ildi.
+- Bosh sahifadagi AI rasm (saytni "yopib qo'ygan") o'rniga haqiqiy surat: I-90, Snoqualmie Pass, Vashington (vaqtincha, muallifi Terms of Use oxirida).
+- Logotip rahbar bergan yangi SVG bilan almashtirildi (header, footer, favicon, og-image).
+- Shrift Poppins, brend yashili `#047046`, to'q ko'k bo'limlar, suzuvchi header, "Get in touch" bloki, footer — eski saytdagidek.
+- ClickUp ko'rigidagi hamma tuzatishlar qo'shildi (pastdagi jadval).
 Batafsil: [docs/design-system.md](docs/design-system.md).
 
 ## Ishga tushirish
@@ -66,11 +64,11 @@ Do'kondan qolgan `/warranty`, `/return`, `/details`, `/help` yo'q. Serverda ular
 
 | Talab | Yangi versiyada |
 |---|---|
-| Bitta dizayn tizimi: 3–4 kulrang, bitta tugma, bitta radius | 4 kulrang (avtomatik tekshirildi), bitta tugma (sariq plastinka), bitta radius 6px |
-| Haqiqiy rasmlar, ishlaydigan logotip | Logotip: `brand/logo.png` + favicon + og-image (Overpass'da yangi plastinka, vaqtincha). Suratlar vaqtinchalik; haqiqiylari kerak |
+| Bitta dizayn tizimi: 3–4 kulrang, bitta tugma, bitta radius | Eski ko'rinish saqlangan holda: 4 kulrang, bitta tugma (yashil, konturli varianti bilan), bitta radius 12px |
+| Haqiqiy rasmlar, ishlaydigan logotip | Hero'dagi AI rasm o'rniga haqiqiy surat; yangi logotip (`brand/logo.svg`) + favicon + og-image. Suratlar vaqtinchalik; kompaniyaning o'z suratlari kerak |
 | Bloklar hech qachon bo'sh emas | API'ga bog'liq "Loading..." bloklar yo'q; ma'lumot bo'lmasa blok yashiriladi yoki zaxira matn chiqadi |
 | "LIVE METRICS" o'rniga ishonch bloki | "Who you are booking with": yuridik nom, manzil (xarita), telefon, ish vaqti; USDOT/MC va sharhlar kelsa o'zi chiqadi |
-| Telefonda header to'liq ko'rinadi, Drive formasi bitta ustun, tugma 44px, input 16px | Header doim ko'rinadi (scroll'da ham), Drive formasi hamma ekranda bitta ustun, tugmalar 44px+, input 17px |
+| Telefonda header to'liq ko'rinadi, Drive formasi bitta ustun, tugma 44px, input 16px | Header doim ko'rinadi (320px'da ham sig'adi), Drive formasi hamma ekranda bitta ustun, tugmalar 44px+, input 16px; quote sahifasida telefonda forma birinchi |
 | Faqat kerakli sahifalar | 9 sahifa + 404 |
 | Privacy va Terms to'liq matn | Ikkalasi to'liq; Meta Pixel, lead formalar, SMS (STOP/HELP) yozilgan |
 | Ijtimoiy havolalar kompaniyaga, manzil xaritaga | Umumiy instagram.com / facebook.com havolalari olib tashlandi (haqiqiylari kelguncha yashirin); manzil Google Maps'ga |
@@ -80,9 +78,8 @@ Do'kondan qolgan `/warranty`, `/return`, `/details`, `/help` yo'q. Serverda ular
 
 ## Tezlik
 
-GitHub Pages preview, PageSpeed Insights (bosh sahifa, 2026-11-13): telefonda 99 (LCP 1.4 s, TBT 0 ms, CLS 0), kompyuterda 100. Hozirgi sayt: telefonda 73.
-SEO 66 faqat preview'dagi noindex sababli; asosiy domenda `PUBLIC_NOINDEX` bo'sh qoldiriladi.
-Lighthouse 13.6 (lokal build, 8 sahifa): telefonda 99–100; Accessibility, Best Practices, SEO 100.
+Lighthouse 13.6 (lokal build, telefon, 2026-11-13): Home 99, Quote, Drive, Services, Contact 100; Accessibility, Best Practices, SEO 100. LCP 1.4–2.2 s, CLS 0–0.02.
+Preview'da SEO past chiqishi faqat noindex sababli; asosiy domenda `PUBLIC_NOINDEX` bo'sh qoldiriladi. Hozirgi sayt: telefonda 73.
 
 ## Ma'lumotlarni o'zgartirish
 

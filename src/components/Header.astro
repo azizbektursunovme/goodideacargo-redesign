@@ -1,5 +1,6 @@
 ---
-// Solid header that stays fully visible while scrolling (the old one clipped on phones).
+// The current site's floating header, kept: logo, Why Us, Services, Fleet, Contact, "Drive with Us", "Get a Quote".
+// Phones get a solid bar fixed at the top, so the header is always fully visible while scrolling.
 import { company } from '../data/site';
 import { url } from '../lib/url';
 
@@ -10,14 +11,14 @@ const items = [
   { href: url('why-us/'), label: 'Why Us', key: 'why' },
   { href: url('service/'), label: 'Services', key: 'services' },
   { href: url('trucking/'), label: 'Fleet', key: 'fleet' },
-  { href: url('drive-with-us/'), label: 'Drive with Us', key: 'drive' },
   { href: url('contact/'), label: 'Contact', key: 'contact' },
 ];
 ---
 <header class="site-header">
-  <div class="wrap site-header__bar">
-    <a class="brand plate" href={url('/')} aria-label={`${company.name}, home`}>
-      <span class="brand__name">Good Idea Cargo</span>
+  <div class="site-header__bar">
+    <a class="brand" href={url('/')} aria-label={`${company.name}, home`}>
+      <img src={url('brand/logo.svg')} width="52" height="52" alt="" />
+      <span class="brand__name">GOOD IDEA CARGO</span>
     </a>
 
     <nav class="nav" aria-label="Main">
@@ -28,46 +29,46 @@ const items = [
       </ul>
     </nav>
 
-    <div class="header-actions">
-      <a class="header-phone" href={company.phoneHref}>{company.phone}</a>
-      <a class="btn" href={url('quote/')} aria-current={current === 'quote' ? 'page' : undefined}>Get a quote</a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Menu">
-        <span class="nav-toggle__bars" aria-hidden="true"></span>
-      </button>
+    <div class="header-actions on-dark">
+      <a class="btn" href={url('drive-with-us/')} aria-current={current === 'drive' ? 'page' : undefined}>Drive with Us</a>
+      <a class="btn btn--outline" href={url('quote/')} aria-current={current === 'quote' ? 'page' : undefined}>Get a Quote</a>
     </div>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Menu">
+      <span class="nav-toggle__bars" aria-hidden="true"></span>
+    </button>
   </div>
 
-  <div class="nav-panel" id="nav-panel" hidden>
-    <div class="wrap">
-      <nav aria-label="Main (mobile)">
-        <ul>
-          <li><a href={url('/')} aria-current={current === 'home' ? 'page' : undefined}>Home</a></li>
-          {items.map((i) => (
-            <li><a href={i.href} aria-current={current === i.key ? 'page' : undefined}>{i.label}</a></li>
-          ))}
-        </ul>
-      </nav>
-      <p class="nav-panel__cta"><a class="btn btn--block" href={url('quote/')}>Get a quote</a></p>
-      <p class="nav-panel__contact">
-        <a class="text-link" href={company.phoneHref}>Call {company.phone}</a>
-        <a class="text-link" href={`mailto:${company.email}`}>{company.email}</a>
-      </p>
+  <div class="nav-panel on-dark" id="nav-panel" hidden>
+    <nav aria-label="Main (mobile)">
+      <ul>
+        <li><a href={url('/')} aria-current={current === 'home' ? 'page' : undefined}>Home</a></li>
+        {items.map((i) => (
+          <li><a href={i.href} aria-current={current === i.key ? 'page' : undefined}>{i.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <div class="btn-row">
+      <a class="btn" href={url('drive-with-us/')}>Drive with Us</a>
+      <a class="btn btn--outline" href={url('quote/')}>Get a Quote</a>
     </div>
   </div>
 </header>
 
 <script>
+  const header = document.querySelector<HTMLElement>('.site-header');
   const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
   const panel = document.getElementById('nav-panel');
+  if (header) {
+    let ticking = false;
+    const update = () => { header.classList.toggle('is-scrolled', window.scrollY > 10); ticking = false; };
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  }
   if (toggle && panel) {
-    const setOpen = (open: boolean) => {
-      toggle.setAttribute('aria-expanded', String(open));
-      panel.hidden = !open;
-    };
+    const setOpen = (open: boolean) => { toggle.setAttribute('aria-expanded', String(open)); panel.hidden = !open; };
     toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
     panel.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a')) setOpen(false); });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !panel.hidden) { setOpen(false); toggle.focus(); }
-    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) { setOpen(false); toggle.focus(); } });
   }
 </script>

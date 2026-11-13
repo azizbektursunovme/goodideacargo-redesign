@@ -1,63 +1,82 @@
 ---
 import Base from '../layouts/Base.astro';
-import PageHead from '../components/PageHead.astro';
-import { company, links, fullAddress, hours, shipperReasons, driverBenefits, reviews } from '../data/site';
+import PageBanner from '../components/PageBanner.astro';
+import Icon from '../components/Icon.astro';
+import { company, shipperReasons, driverBenefits } from '../data/site';
 import { url } from '../lib/url';
+
+const benefitIcons = ['note', 'route', 'clock', 'phone', 'shield', 'check'];
+const pillars = [
+  { title: 'Regulation-ready', body: 'Our office keeps the paperwork and filings in order, so drivers can focus on the road.' },
+  { title: 'Protected', body: 'We confirm every load, lane and checkpoint before a wheel turns. No surprises.' },
+  { title: 'Reliable', body: 'When conditions change, we respond fast with practical solutions that protect your schedule and your load.' },
+];
 ---
 <Base
-  title="Why Good Idea Cargo | Freight carrier in Renton, Washington"
-  description="Why shippers and drivers work with Good Idea Cargo: one team from quote to delivery, straight answers, weekly driver pay and 24/7 emergency dispatch."
+  title="Why Us | Good Idea Cargo"
+  description="Why shippers and drivers work with Good Idea Cargo: clear communication, weekly driver pay, steady lanes and 24/7 emergency dispatch from Renton, Washington."
   current="why"
 >
-  <PageHead photo="band-why" title="Why Good Idea Cargo" lede="A trucking company in Renton, Washington, built on clear communication with shippers and fair treatment of drivers." />
+  <PageBanner photo="band-why" title="Why Us" />
 
-  <section class="section" aria-labelledby="shippers-title">
-    <div class="wrap trust">
-      <div class="section-head">
-        <h2 id="shippers-title">For shippers</h2>
-        <p>You talk to the people who move your freight.</p>
-        <p><a class="btn" href={url('quote/')}>Get a quote</a></p>
+  <section class="section" aria-labelledby="intro-title">
+    <div class="wrap split">
+      <div class="split__copy">
+        <span class="eyebrow">Why choose us</span>
+        <h2 id="intro-title">A better road with Good Idea Cargo</h2>
+        <p>We built Good Idea Cargo around one simple truth: when drivers succeed, the whole operation gets stronger. Clear pay, steady work and a team that backs you up.</p>
+        <ul class="chips">
+          <li><Icon name="check" />No hidden fees</li>
+          <li><Icon name="check" />Weekly pay</li>
+          <li><Icon name="check" />24/7 dispatch</li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn" href={url('drive-with-us/')}>Join Good Idea Cargo</a>
+          <a class="btn btn--outline" href={url('service/')}>Our Services</a>
+        </div>
       </div>
-      <ul class="reasons">
-        {shipperReasons.map((r) => <li><h3>{r.title}</h3><p>{r.body}</p></li>)}
+      <ul class="cards">
+        {shipperReasons.map((r) => <li class="card card--accent"><h3>{r.title}</h3><p>{r.body}</p></li>)}
       </ul>
     </div>
   </section>
 
-  <section class="section section--soft" aria-labelledby="drivers-title">
+  <section class="section section--grey" aria-labelledby="benefits-title">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="drivers-title">For drivers</h2>
-        <p>When drivers do well, the whole operation runs better. That is how we run it.</p>
+        <span class="eyebrow">Driver benefits</span>
+        <h2 id="benefits-title">Everything you need on the road</h2>
+        <p>Not just jobs: careers built on real support, real pay and real respect for your time and your family.</p>
       </div>
-      <ul class="benefits">
-        {driverBenefits.map((b) => <li><h3>{b.title}</h3><p>{b.body}</p></li>)}
+      <ul class="cards cards--3">
+        {driverBenefits.map((b, i) => (
+          <li class="card"><span class="icon-box"><Icon name={benefitIcons[i % benefitIcons.length]} /></span><h3>{b.title}</h3><p>{b.body}</p></li>
+        ))}
       </ul>
-      <p style="margin-top:32px"><a class="text-link" href={url('drive-with-us/')}>Apply to drive with us</a></p>
     </div>
   </section>
 
-  <section class="section" aria-labelledby="facts-title">
-    <div class="wrap trust">
+  <section class="section section--dark on-dark" aria-labelledby="pillars-title">
+    <div class="wrap">
       <div class="section-head">
-        <h2 id="facts-title">Company details</h2>
-        <p>Everything you need to check us before your first load.</p>
+        <span class="eyebrow">Our foundation</span>
+        <h2 id="pillars-title">Built on three core pillars</h2>
       </div>
-      <dl class="facts">
-        <div><dt>Company</dt><dd>{company.legalName}</dd></div>
-        {company.dot && <div><dt>USDOT</dt><dd>{links.fmcsa ? <a href={links.fmcsa} target="_blank" rel="noopener">{company.dot}</a> : company.dot}</dd></div>}
-        {company.mc && <div><dt>MC</dt><dd>{company.mc}</dd></div>}
-        <div><dt>Office</dt><dd><a href={links.maps} target="_blank" rel="noopener">{fullAddress}</a></dd></div>
-        <div><dt>Service area</dt><dd>The 48 contiguous states</dd></div>
-        <div><dt>Hours</dt><dd>{hours.office}<br />{hours.dispatch}</dd></div>
-      </dl>
+      <ul class="cards cards--3">
+        {pillars.map((p) => <li class="card"><h3>{p.title}</h3><p>{p.body}</p></li>)}
+      </ul>
     </div>
-    {reviews.length > 0 && (
-      <div class="wrap">
-        <ul class="quotes">
-          {reviews.map((r) => <li><blockquote><p>{r.quote}</p><footer>{r.name}, {r.role}</footer></blockquote></li>)}
-        </ul>
+  </section>
+
+  <section class="section section--grey" aria-labelledby="cta-title">
+    <div class="wrap cta-band">
+      <span class="eyebrow">Now hiring</span>
+      <h2 id="cta-title">Ready to drive with us?</h2>
+      <p>Join our drivers and partners. Questions first? Call {company.phone}.</p>
+      <div class="btn-row">
+        <a class="btn" href={url('drive-with-us/#apply')}>Apply Now</a>
+        <a class="btn btn--outline" href={url('quote/')}>Get a Quote</a>
       </div>
-    )}
+    </div>
   </section>
 </Base>

@@ -4,7 +4,7 @@ Kelganda `src/data/site.ts` dagi `PENDING` joylar to'ldiriladi.
 
 | # | Nima kerak | Hozir saytda |
 |---|---|---|
-| 1 | Logotip (SVG) | Overpass shriftidagi vaqtinchalik plastinka-logotip (`brand/logo.png`) |
+| 1 | Logotip (SVG) | Olindi: rahbar bergan yangi logotip (`brand/logo.svg`) |
 | 2 | Haqiqiy fleet va haydovchi rasmlari (o'z yuk mashinalari, haydovchilar, ofis), 1920px+, AI emas | Vashington yo'llaridan vaqtinchalik Wikimedia suratlari |
 | 3 | USDOT va MC raqamlari, FMCSA havolasi | Ishonch blokida joy tayyor, kelguncha yashirin |
 | 4 | Xizmatlar va yo'nalishlar tasdig'i (full truckload, expedited, dedicated; uskunalar) | Eski saytdagi 3 xizmat |

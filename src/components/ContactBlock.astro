@@ -1,0 +1,30 @@
+---
+// "Get in touch" block from the current home page: contact highlights, a quote card and the message form.
+import Icon from './Icon.astro';
+import ContactForm from './ContactForm.astro';
+import { company, links, fullAddress, hours } from '../data/site';
+import { url } from '../lib/url';
+
+interface Props { headingLevel?: 'h1' | 'h2' }
+const { headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+---
+<div class="wrap contact-grid">
+  <div class="contact-info">
+    <span class="eyebrow">Get in touch</span>
+    <Heading>Have questions or need a quote?</Heading>
+    <p>Good Idea Cargo is ready to help with freight questions, rate requests and delivery planning. Reach out and our team will get back to you as quickly as possible.</p>
+    <ul class="highlights">
+      <li class="highlight"><span class="icon-box"><Icon name="pin" /></span><div><strong>Address</strong><p><a href={links.maps} target="_blank" rel="noopener">{fullAddress}</a></p><small>Serving all 48 contiguous states</small></div></li>
+      <li class="highlight"><span class="icon-box"><Icon name="phone" /></span><div><strong>Phone</strong><p><a href={company.phoneHref}>{company.phone}</a></p><small>{hours.office}</small></div></li>
+      <li class="highlight"><span class="icon-box"><Icon name="mail" /></span><div><strong>Email</strong><p><a href={`mailto:${company.email}`}>{company.email}</a></p><small>We reply during office hours</small></div></li>
+      <li class="highlight"><span class="icon-box"><Icon name="clock" /></span><div><strong>Business hours</strong><p>{hours.office}</p><small>{hours.dispatch}</small></div></li>
+    </ul>
+    <div class="quote-cta on-dark">
+      <span class="eyebrow">Need a quick quote?</span>
+      <h3>Use our quote form to get a competitive rate for your shipment.</h3>
+      <a class="btn" href={url('quote/')}>Get a Quote</a>
+    </div>
+  </div>
+  <ContactForm />
+</div>

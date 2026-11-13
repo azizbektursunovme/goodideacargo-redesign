@@ -1,0 +1,19 @@
+---
+// Inner page banner (the current site's dark photo header with the page name and breadcrumb).
+import Photo from './Photo.astro';
+import { url } from '../lib/url';
+
+interface Props { title: string; photo?: string }
+const { title, photo } = Astro.props;
+---
+<section class={photo ? 'banner' : 'banner banner--plain'}>
+  {photo && <Photo name={photo} widths={[800, 1440]} sizes="100vw" width={1440} height={810} alt="" eager />}
+  <div class="wrap banner__inner">
+    <h1>{title}</h1>
+    <ol class="crumbs" aria-label="Breadcrumb">
+      <li><a href={url('/')}>Home</a></li>
+      <li aria-hidden="true">/</li>
+      <li aria-current="page">{title}</li>
+    </ol>
+  </div>
+</section>

@@ -21,7 +21,8 @@ const base = import.meta.env.BASE_URL;
 const path = Astro.url.pathname.startsWith(base) ? `/${Astro.url.pathname.slice(base.length)}` : Astro.url.pathname;
 const canonical = new URL(path.replace(/\/{2,}/g, '/'), ORIGIN).href;
 const hideFromSearch = noindex || import.meta.env.PUBLIC_NOINDEX === 'true';
-const fontUrl = url('fonts/overpass-latin-wght.woff2');
+const font = (w: number) => url(`fonts/poppins-latin-${w}.woff2`);
+const fontFaces = [400, 500, 600, 700].map((w) => `@font-face{font-family:'Poppins';src:url('${font(w)}') format('woff2');font-weight:${w};font-style:normal;font-display:swap}`).join('');
 // Meta (Facebook/Instagram) ads: the Pixel loads only when its ID is configured, and domain verification
 // is a meta tag from Business Settings. Both empty on the preview.
 const pixelId = import.meta.env.PUBLIC_META_PIXEL_ID ?? '';
@@ -57,14 +58,16 @@ const jsonLd = {
     <meta name="description" content={description} />
     {hideFromSearch && <meta name="robots" content="noindex, nofollow" />}
     {!noindex && <link rel="canonical" href={canonical} />}
-    <meta name="theme-color" content="#0b6b3a" />
+    <meta name="theme-color" content="#09111f" />
+    <link rel="icon" type="image/svg+xml" href={url('brand/logo.svg')} />
     <link rel="icon" type="image/png" sizes="32x32" href={url('brand/favicon-32.png')} />
     <link rel="apple-touch-icon" href={url('brand/apple-touch-icon.png')} />
-    <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={font(400)} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={font(600)} as="font" type="font/woff2" crossorigin />
     {preload.map((p) => (
       <link rel="preload" as="image" imagesrcset={p.srcset} imagesizes={p.sizes} media={p.media} fetchpriority="high" />
     ))}
-    <style is:inline set:html={`@font-face{font-family:'Overpass';src:url('${fontUrl}') format('woff2');font-weight:300 900;font-style:normal;font-display:swap}`}></style>
+    <style is:inline set:html={fontFaces}></style>
     {fbDomainVerification && <meta name="facebook-domain-verification" content={fbDomainVerification} />}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={company.name} />

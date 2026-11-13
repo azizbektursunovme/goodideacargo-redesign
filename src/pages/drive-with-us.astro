@@ -1,35 +1,42 @@
 ---
 import Base from '../layouts/Base.astro';
-import PageHead from '../components/PageHead.astro';
+import PageBanner from '../components/PageBanner.astro';
 import DriveForm from '../components/DriveForm.astro';
+import Icon from '../components/Icon.astro';
 import { company, driverBenefits } from '../data/site';
+
+const benefitIcons = ['note', 'route', 'clock', 'phone', 'shield', 'check'];
 ---
 <Base
-  title="Drive with Us: owner-operators and drivers | Good Idea Cargo"
-  description="Drive with Good Idea Cargo: steady freight lanes across the 48 states, weekly direct deposit and 24/7 dispatch. Apply online in two minutes."
+  title="Drive with Us | Good Idea Cargo"
+  description="Owner-operators and drivers: consistent loads across the 48 states, weekly direct deposit and 24/7 dispatch. Apply to drive with Good Idea Cargo."
   current="drive"
 >
-  <PageHead photo="band-drive" title="Drive with us" lede="Owner-operators and company drivers: steady lanes across the 48 states, weekly pay and dispatch that has your back.">
-    <p><a class="btn" href="#apply">Apply now</a></p>
-  </PageHead>
+  <PageBanner photo="band-drive" title="Drive with Us" />
 
-  <section class="section" aria-labelledby="benefits-title">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="benefits-title">What you get</h2>
-        <p>Clear pay, steady work and a team that backs you up.</p>
+  <section class="section" aria-labelledby="intro-title">
+    <div class="wrap split">
+      <div class="split__copy">
+        <span class="eyebrow">Join our team</span>
+        <h2 id="intro-title">Drive for us. Earn more.</h2>
+        <p>Good Idea Cargo connects owner-operators and drivers with consistent loads across the 48 contiguous states. Join our growing network today.</p>
+        <div class="btn-row">
+          <a class="btn" href="#apply">Apply Now</a>
+          <a class="btn btn--outline" href={company.phoneHref}>Call Us</a>
+        </div>
       </div>
-      <ul class="benefits">
-        {driverBenefits.map((b) => <li><h3>{b.title}</h3><p>{b.body}</p></li>)}
+      <ul class="cards cards--2">
+        {driverBenefits.slice(0, 4).map((b, i) => <li class="card"><span class="icon-box"><Icon name={benefitIcons[i]} /></span><h3>{b.title}</h3><p>{b.body}</p></li>)}
       </ul>
     </div>
   </section>
 
-  <section class="section section--soft" id="apply" aria-labelledby="apply-title">
-    <div class="wrap" style="max-width:760px">
+  <section class="section section--grey" id="apply" aria-labelledby="apply-title">
+    <div class="wrap" style="max-width:780px">
       <div class="section-head">
-        <h2 id="apply-title">Apply to drive</h2>
-        <p>Two minutes. Our recruiting team calls you back. Questions first? Call <a href={company.phoneHref}>{company.phone}</a>.</p>
+        <h2 id="apply-title">Apply now</h2>
+        <span class="section-head__line" aria-hidden="true"></span>
+        <p>Fill out the form and our recruiting team will call you back.</p>
       </div>
       <DriveForm />
     </div>

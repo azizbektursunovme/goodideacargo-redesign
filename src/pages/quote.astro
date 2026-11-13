@@ -1,20 +1,43 @@
 ---
+// Get a Quote: the current page's layout (side cards + form), with a form that reports "sent" only after the server answers.
 import Base from '../layouts/Base.astro';
-import PageHead from '../components/PageHead.astro';
+import PageBanner from '../components/PageBanner.astro';
 import QuoteForm from '../components/QuoteForm.astro';
-import ContactPanel from '../components/ContactPanel.astro';
+import Icon from '../components/Icon.astro';
+import { company, quoteSteps, hours } from '../data/site';
 ---
 <Base
-  title="Get a freight quote | Good Idea Cargo"
-  description="Request a free, no-obligation freight quote for full truckload, expedited or dedicated shipping across the 48 states. Good Idea Cargo replies by phone or email."
+  title="Get a Free Quote | Good Idea Cargo"
+  description="Request a free, no-obligation freight quote for full truckload, expedited or dedicated shipping across the 48 states."
   current="quote"
 >
-  <PageHead photo="band-quote" title="Get a quote" lede="Free and no obligation. Tell us the lane, the date and the freight." />
+  <PageBanner photo="band-quote" title="Get a Free Quote" />
 
-  <section class="section section--soft">
-    <div class="wrap form-layout">
+  <section class="section section--grey">
+    <div class="wrap quote-layout">
       <QuoteForm />
-      <ContactPanel title="Prefer to call?" text="Talk to dispatch about your load directly." />
+      <aside class="quote-aside" aria-label="About quotes">
+        <div class="aside-card">
+          <span class="icon-box"><Icon name="check" /></span>
+          <h2>Why request a quote?</h2>
+          <ul class="checks">
+            <li>No-obligation quote</li>
+            <li>Personal follow-up call</li>
+            <li>Clear rate before pickup</li>
+          </ul>
+        </div>
+        <div class="aside-card aside-card--dark on-dark">
+          <h2>Prefer to call?</h2>
+          <p>Speak directly with our dispatch team. {hours.office}; {hours.dispatch.toLowerCase()}.</p>
+          <a class="aside-card__phone" href={company.phoneHref}>{company.phone}</a>
+        </div>
+        <div class="aside-card">
+          <h2>What happens next?</h2>
+          <ol class="steps">
+            {quoteSteps.map((s) => <li><div><h3>{s.title}</h3></div></li>)}
+          </ol>
+        </div>
+      </aside>
     </div>
   </section>
 </Base>

@@ -4,13 +4,15 @@ import { company } from '../data/site';
 import { url } from '../lib/url';
 ---
 <Base title="Page not found | Good Idea Cargo" description="This page does not exist." noindex>
-  <section class="wrap notfound">
-    <div class="plate on-dark">
-      <p>Wrong turn</p>
+  <section class="section notfound">
+    <div class="wrap">
+      <img src={url('brand/logo.svg')} width="120" height="120" alt="" />
       <h1>This page is not on our route</h1>
-      <p>It may have moved, or the link is old. Head back to the home page, or call us at <a href={company.phoneHref}>{company.phone}</a>.</p>
-      <p><a class="btn" href={url('/')}>Go to the home page</a></p>
-      <p><a href={url('quote/')}>Get a quote</a></p>
+      <p>It may have moved, or the link is old. Go back to the home page, or call us at <a href={company.phoneHref}>{company.phone}</a>.</p>
+      <div class="btn-row">
+        <a class="btn" href={url('/')}>Go to the home page</a>
+        <a class="btn btn--outline" href={url('quote/')}>Get a Quote</a>
+      </div>
     </div>
   </section>
 </Base>

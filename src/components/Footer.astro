@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { company, links, fullAddress, hours, social } from '../data/site';
 import { url } from '../lib/url';
 const year = new Date().getFullYear();
@@ -7,15 +8,13 @@ const year = new Date().getFullYear();
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="plate brand"><span class="brand__name">Good Idea Cargo</span></span>
-        <p>Freight across the 48 contiguous states, from our office in {company.city}, {company.stateName}.</p>
+        <a class="brand" href={url('/')} aria-label={`${company.name}, home`}>
+          <img src={url('brand/logo.svg')} width="72" height="72" alt="" loading="lazy" />
+          <span class="brand__name">Good Idea Cargo</span>
+        </a>
+        <p>{company.legalName} provides professional freight transportation services across all 48 contiguous states. Fast, safe, and on-time delivery you can count on.</p>
         {(company.dot || company.mc) && (
           <p>{company.dot && <>USDOT {company.dot}</>}{company.dot && company.mc && <br />}{company.mc && <>MC {company.mc}</>}</p>
-        )}
-        {social.length > 0 && (
-          <ul class="footer-social">
-            {social.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.name}</a></li>)}
-          </ul>
         )}
       </div>
 
@@ -34,17 +33,17 @@ const year = new Date().getFullYear();
       <div class="footer-col">
         <h2>Contact</h2>
         <ul>
-          <li><a href={company.phoneHref}>{company.phone}</a></li>
-          <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
-          <li><a href={links.maps} rel="noopener" target="_blank">{fullAddress}</a></li>
-          <li>{hours.office}</li>
-          <li>{hours.dispatch}</li>
+          <li><Icon name="pin" /><a href={links.maps} rel="noopener" target="_blank">{fullAddress}</a></li>
+          <li><Icon name="phone" /><a href={company.phoneHref}>{company.phone}</a></li>
+          <li><Icon name="mail" /><a href={`mailto:${company.email}`}>{company.email}</a></li>
+          <li><Icon name="clock" /><span>{hours.office}<br />{hours.dispatch}</span></li>
+          {social.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.name}</a></li>)}
         </ul>
       </div>
     </div>
 
-    <div class="footer-legal">
-      <p>© {year} {company.legalName}</p>
+    <div class="footer-bottom">
+      <p>© {year} {company.legalName}. All rights reserved.</p>
       <ul>
         <li><a href={url('privacy-policy/')}>Privacy Policy</a></li>
         <li><a href={url('terms-of-use/')}>Terms of Use</a></li>

@@ -1,48 +1,82 @@
 ---
-// Fleet page (URL /trucking/ kept from the old site). The truck list fills from src/data/site.ts → fleet;
+// Fleet page (URL /trucking/ kept from the current site). The truck list fills from src/data/site.ts → fleet;
 // while it is empty the page says so plainly instead of "0 trucks active" or "Loading...".
 import Base from '../layouts/Base.astro';
-import PageHead from '../components/PageHead.astro';
+import PageBanner from '../components/PageBanner.astro';
 import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
 import { company, fleet, fleetStandards } from '../data/site';
 import { url } from '../lib/url';
+
+const icons = ['shield', 'gps', 'truck'];
 ---
 <Base
-  title="Our fleet | Good Idea Cargo"
-  description="The trucks behind Good Idea Cargo: inspected, maintained and tracked on the road, ready for full truckload and expedited freight."
+  title="Fleet | Good Idea Cargo"
+  description="The Good Idea Cargo fleet: inspected, maintained and tracked on the road, ready for full truckload and expedited freight."
   current="fleet"
 >
-  <PageHead photo="band-fleet" title="Our fleet" lede="A focused fleet kept ready for daily freight work." />
+  <PageBanner photo="band-fleet" title="Fleet" />
 
-  <section class="section" aria-labelledby="standards-title">
+  <section class="section" aria-labelledby="intro-title">
     <div class="wrap split">
-      <Photo name="fleet-cab" widths={[480, 800, 1200]} sizes="(min-width: 900px) 560px, 100vw" alt="Green Freightliner tractor in North Bend, Washington" />
       <div class="split__copy">
-        <h2 id="standards-title">What every truck has</h2>
-        <ul class="reasons">
-          {fleetStandards.map((f) => <li><h3>{f.title}</h3><p>{f.body}</p></li>)}
-        </ul>
+        <span class="eyebrow">Our fleet</span>
+        <h2 id="intro-title">Built for the road</h2>
+        <p>Good Idea Cargo operates a focused fleet built for safe, reliable freight delivery. Every unit is maintained to high standards, tracked on the road and ready for daily freight work.</p>
+        <div class="btn-row">
+          <a class="btn" href={url('quote/')}>Request a Quote</a>
+          <a class="btn btn--outline" href={company.phoneHref}>Call Us Now</a>
+        </div>
       </div>
+      <Photo name="fleet-cab" widths={[480, 800, 1200]} alt="" sizes="(min-width: 900px) 560px, 100vw" />
     </div>
   </section>
 
-  <section class="section section--soft" aria-labelledby="units-title">
+  <section class="section section--grey" aria-labelledby="standards-title">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="units-title">Equipment</h2>
+        <h2 id="standards-title">Why our fleet stands out</h2>
+        <span class="section-head__line" aria-hidden="true"></span>
+        <p>Built around reliability, visibility and safe delivery on every mile.</p>
+      </div>
+      <ul class="cards cards--3">
+        {fleetStandards.map((f, i) => <li class="card"><span class="icon-box"><Icon name={icons[i]} /></span><h3>{f.title}</h3><p>{f.body}</p></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="units-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="units-title">Our vehicles</h2>
+        <span class="section-head__line" aria-hidden="true"></span>
       </div>
       {fleet.length > 0 ? (
-        <dl class="facts">
-          {fleet.map((t) => <div><dt>Unit {t.unit}</dt><dd>{t.tractor}{t.year && <>, {t.year}</>}, {t.trailer}</dd></div>)}
-        </dl>
+        <ul class="cards cards--3">
+          {fleet.map((t) => <li class="card"><h3>Unit {t.unit}</h3><p>{t.tractor}{t.year && <>, {t.year}</>}</p><p>{t.trailer}</p></li>)}
+        </ul>
       ) : (
         <div class="fallback">
           <h3>Checking a truck for your lane?</h3>
-          <p>Our equipment list is being updated. Call dispatch and we will tell you which truck fits your load and date.</p>
-          <p><a class="btn" href={url('quote/')}>Get a quote</a></p>
-          <p><a class="text-link" href={company.phoneHref}>Call {company.phone}</a></p>
+          <p>Our vehicle list is being updated. Call us and we will tell you which truck fits your load and date.</p>
+          <div class="btn-row">
+            <a class="btn" href={url('quote/')}>Get a Quote</a>
+            <a class="btn btn--outline" href={company.phoneHref}>Call {company.phone}</a>
+          </div>
         </div>
       )}
+    </div>
+  </section>
+
+  <section class="section section--dark on-dark" aria-labelledby="cta-title">
+    <div class="wrap cta-band">
+      <span class="eyebrow">Interested in working with us?</span>
+      <h2 id="cta-title">Ready to move your freight?</h2>
+      <p>Whether you are a broker or a business, Good Idea Cargo is ready to haul your freight reliably and safely.</p>
+      <div class="btn-row">
+        <a class="btn" href={url('quote/')}>Get a Quote</a>
+        <a class="btn btn--outline" href={url('service/')}>View Services</a>
+      </div>
     </div>
   </section>
 </Base>

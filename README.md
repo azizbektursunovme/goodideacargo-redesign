@@ -78,6 +78,7 @@ Do'kondan qolgan `/warranty`, `/return`, `/details`, `/help` yo'q. Serverda ular
 
 ## Tezlik
 
+GitHub Pages preview, PageSpeed Insights (bosh sahifa, 2026-11-13): telefonda **100** (LCP 1.5 s, TBT 0 ms, CLS 0), kompyuterda **100**.
 Lighthouse 13.6 (lokal build, telefon, 2026-11-13): Home 99, Quote, Drive, Services, Contact 100; Accessibility, Best Practices, SEO 100. LCP 1.4–2.2 s, CLS 0–0.02.
 Preview'da SEO past chiqishi faqat noindex sababli; asosiy domenda `PUBLIC_NOINDEX` bo'sh qoldiriladi. Hozirgi sayt: telefonda 73.
 

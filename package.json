@@ -1,0 +1,20 @@
+{
+  "name": "goodideacargo-redesign",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy:pages": "node scripts/deploy-pages.mjs"
+  },
+  "license": "UNLICENSED",
+  "description": "Good Idea Cargo website redesign (preview)",
+  "dependencies": {
+    "astro": "7.4.11"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.23.4"
+  }
+}

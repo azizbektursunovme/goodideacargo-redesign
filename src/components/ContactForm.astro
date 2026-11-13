@@ -1,0 +1,58 @@
+---
+// Contact message. Sends JSON to PUBLIC_CONTACT_ENDPOINT through LeadForm.
+import LeadForm from './LeadForm.astro';
+import Icon from './Icon.astro';
+import { url } from '../lib/url';
+
+const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
+---
+<LeadForm
+  id="contact-form"
+  title="Contact form"
+  endpoint={endpoint}
+  source="website-contact"
+  submitLabel="Send message"
+  sendingLabel="Sending message…"
+  successTitle="Message sent"
+  successText="Thank you. We reply by phone or email."
+>
+  <fieldset class="step" aria-labelledby="m-step-1">
+    <div class="step__head">
+      <div>
+        <h3 class="step__title" id="m-step-1">Send us a message</h3>
+        <p class="step__hint">Need a rate? The <a href={url('quote/')}>quote form</a> asks the right questions.</p>
+      </div>
+    </div>
+    <div class="form-grid form-grid--2">
+      <div class="field">
+        <label class="label" for="m-first">First name</label>
+        <input class="input" id="m-first" name="firstName" autocomplete="given-name" required data-msg="Enter your first name." aria-describedby="m-first-err" />
+        <p class="field-error" id="m-first-err"></p>
+      </div>
+      <div class="field">
+        <label class="label" for="m-last">Last name</label>
+        <input class="input" id="m-last" name="lastName" autocomplete="family-name" required data-msg="Enter your last name." aria-describedby="m-last-err" />
+        <p class="field-error" id="m-last-err"></p>
+      </div>
+      <div class="field">
+        <label class="label" for="m-email">Email</label>
+        <div class="input-wrap"><Icon name="mail" /><input class="input" id="m-email" name="email" type="email" autocomplete="email" required placeholder="name@company.com" data-msg="Enter an email address like name@company.com." aria-describedby="m-email-err" /></div>
+        <p class="field-error" id="m-email-err"></p>
+      </div>
+      <div class="field">
+        <label class="label" for="m-phone">Phone <span class="opt">(optional)</span></label>
+        <div class="input-wrap"><Icon name="phone" /><input class="input" id="m-phone" name="phone" type="tel" autocomplete="tel" pattern="[0-9()+.\s-]{10,20}" placeholder="(206) 555-0100" data-msg="Enter a phone number with area code, or leave it empty." aria-describedby="m-phone-err" /></div>
+        <p class="field-error" id="m-phone-err"></p>
+      </div>
+      <div class="field span-2">
+        <label class="label" for="m-company">Company <span class="opt">(optional)</span></label>
+        <div class="input-wrap"><Icon name="building" /><input class="input" id="m-company" name="company" autocomplete="organization" /></div>
+      </div>
+      <div class="field span-2">
+        <label class="label" for="m-message">Message</label>
+        <textarea class="input" id="m-message" name="message" rows="4" required data-msg="Write your message." aria-describedby="m-message-err"></textarea>
+        <p class="field-error" id="m-message-err"></p>
+      </div>
+    </div>
+  </fieldset>
+</LeadForm>

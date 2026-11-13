@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { company, links, fullAddress, hours, shipperReasons, driverBenefits, reviews } from '../data/site';
+import { url } from '../lib/url';
+---
+<Base
+  title="Why Good Idea Cargo | Freight carrier in Renton, Washington"
+  description="Why shippers and drivers work with Good Idea Cargo: one team from quote to delivery, straight answers, weekly driver pay and 24/7 emergency dispatch."
+  current="why"
+>
+  <PageHead photo="band-why" title="Why Good Idea Cargo" lede="A trucking company in Renton, Washington, built on clear communication with shippers and fair treatment of drivers." />
+
+  <section class="section" aria-labelledby="shippers-title">
+    <div class="wrap trust">
+      <div class="section-head">
+        <h2 id="shippers-title">For shippers</h2>
+        <p>You talk to the people who move your freight.</p>
+        <p><a class="btn" href={url('quote/')}>Get a quote</a></p>
+      </div>
+      <ul class="reasons">
+        {shipperReasons.map((r) => <li><h3>{r.title}</h3><p>{r.body}</p></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--soft" aria-labelledby="drivers-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="drivers-title">For drivers</h2>
+        <p>When drivers do well, the whole operation runs better. That is how we run it.</p>
+      </div>
+      <ul class="benefits">
+        {driverBenefits.map((b) => <li><h3>{b.title}</h3><p>{b.body}</p></li>)}
+      </ul>
+      <p style="margin-top:32px"><a class="text-link" href={url('drive-with-us/')}>Apply to drive with us</a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="facts-title">
+    <div class="wrap trust">
+      <div class="section-head">
+        <h2 id="facts-title">Company details</h2>
+        <p>Everything you need to check us before your first load.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Company</dt><dd>{company.legalName}</dd></div>
+        {company.dot && <div><dt>USDOT</dt><dd>{links.fmcsa ? <a href={links.fmcsa} target="_blank" rel="noopener">{company.dot}</a> : company.dot}</dd></div>}
+        {company.mc && <div><dt>MC</dt><dd>{company.mc}</dd></div>}
+        <div><dt>Office</dt><dd><a href={links.maps} target="_blank" rel="noopener">{fullAddress}</a></dd></div>
+        <div><dt>Service area</dt><dd>The 48 contiguous states</dd></div>
+        <div><dt>Hours</dt><dd>{hours.office}<br />{hours.dispatch}</dd></div>
+      </dl>
+    </div>
+    {reviews.length > 0 && (
+      <div class="wrap">
+        <ul class="quotes">
+          {reviews.map((r) => <li><blockquote><p>{r.quote}</p><footer>{r.name}, {r.role}</footer></blockquote></li>)}
+        </ul>
+      </div>
+    )}
+  </section>
+</Base>

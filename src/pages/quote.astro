@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import ContactPanel from '../components/ContactPanel.astro';
+---
+<Base
+  title="Get a freight quote | Good Idea Cargo"
+  description="Request a free, no-obligation freight quote for full truckload, expedited or dedicated shipping across the 48 states. Good Idea Cargo replies by phone or email."
+  current="quote"
+>
+  <PageHead photo="band-quote" title="Get a quote" lede="Free and no obligation. Tell us the lane, the date and the freight." />
+
+  <section class="section section--soft">
+    <div class="wrap form-layout">
+      <QuoteForm />
+      <ContactPanel title="Prefer to call?" text="Talk to dispatch about your load directly." />
+    </div>
+  </section>
+</Base>

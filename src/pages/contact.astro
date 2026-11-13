@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import ContactForm from '../components/ContactForm.astro';
+import ContactPanel from '../components/ContactPanel.astro';
+import { company, fullAddress } from '../data/site';
+import { url } from '../lib/url';
+---
+<Base
+  title="Contact Good Idea Cargo | (206) 704-4444"
+  description={`Call ${company.phone}, email ${company.email} or visit ${fullAddress}. Office hours Mon–Fri, 5 AM – 5 PM Pacific; emergency dispatch 24/7.`}
+  current="contact"
+>
+  <PageHead photo="band-contact" title="Contact" lede="Questions, rates or delivery planning: call, write or send the form." />
+
+  <section class="section section--soft">
+    <div class="wrap form-layout">
+      <ContactForm />
+      <ContactPanel title="Call or write" text="We answer during office hours. For an emergency on a load, dispatch is available 24/7.">
+        Need a rate? <a href={url('quote/')}>Get a quote</a>.
+      </ContactPanel>
+    </div>
+  </section>
+</Base>

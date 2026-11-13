@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Photo from '../components/Photo.astro';
+import { company, services, quoteSteps } from '../data/site';
+import { url } from '../lib/url';
+
+const quoteLabel: Record<string, [string, string]> = {
+  'full-truckload': ['Full truckload', 'Quote a full truckload'],
+  expedited: ['Expedited', 'Quote an expedited load'],
+  dedicated: ['Dedicated lane', 'Ask about a dedicated lane'],
+};
+---
+<Base
+  title="Services: full truckload, expedited, dedicated | Good Idea Cargo"
+  description="Full truckload, expedited freight and dedicated lanes across the 48 contiguous states, from Good Idea Cargo in Renton, Washington."
+  current="services"
+>
+  <PageHead photo="band-services" title="Services" lede="Everyday freight and urgent moves alike, planned for reliable timing and clear communication." />
+
+  {services.map((s, i) => (
+    <section class={i % 2 ? 'section section--soft' : 'section'} id={s.id} aria-labelledby={`${s.id}-title`}>
+      <div class="wrap split">
+        <Photo name={s.photo} alt="" sizes="(min-width: 900px) 560px, 100vw" />
+        <div class="split__copy">
+          <h2 id={`${s.id}-title`}>{s.title}</h2>
+          <p>{s.body}</p>
+          <ul class="checks">{s.points.map((p) => <li>{p}</li>)}</ul>
+          <p><a class="btn" href={url(`quote/?service=${encodeURIComponent(quoteLabel[s.id][0])}`)}>{quoteLabel[s.id][1]}</a></p>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section" aria-labelledby="steps-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="steps-title">How a quote works</h2>
+        <p>Not sure which service fits? Send the details and we will tell you.</p>
+      </div>
+      <ol class="steps">
+        {quoteSteps.map((s) => <li><div><h3>{s.title}</h3><p>{s.body}</p></div></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--green on-dark" aria-labelledby="cta-title">
+    <div class="wrap cta">
+      <div>
+        <h2 id="cta-title">Need a plan built around your load?</h2>
+        <p style="margin-top:12px;max-width:52ch">Every shipment is different. Tell us what you move and we help choose the route, timing and setup.</p>
+      </div>
+      <div class="cta__actions">
+        <a class="btn btn--lg" href={url('quote/')}>Get a quote</a>
+        <a class="text-link" href={company.phoneHref}>Call {company.phone}</a>
+      </div>
+    </div>
+  </section>
+</Base>

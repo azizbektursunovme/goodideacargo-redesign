@@ -1,0 +1,54 @@
+---
+import { company, links, fullAddress, hours, social } from '../data/site';
+import { url } from '../lib/url';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer on-dark">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="plate brand"><span class="brand__name">Good Idea Cargo</span></span>
+        <p>Freight across the 48 contiguous states, from our office in {company.city}, {company.stateName}.</p>
+        {(company.dot || company.mc) && (
+          <p>{company.dot && <>USDOT {company.dot}</>}{company.dot && company.mc && <br />}{company.mc && <>MC {company.mc}</>}</p>
+        )}
+        {social.length > 0 && (
+          <ul class="footer-social">
+            {social.map((s) => <li><a href={s.url} rel="noopener" target="_blank">{s.name}</a></li>)}
+          </ul>
+        )}
+      </div>
+
+      <div class="footer-col">
+        <h2>Pages</h2>
+        <ul>
+          <li><a href={url('why-us/')}>Why Us</a></li>
+          <li><a href={url('service/')}>Services</a></li>
+          <li><a href={url('trucking/')}>Fleet</a></li>
+          <li><a href={url('drive-with-us/')}>Drive with Us</a></li>
+          <li><a href={url('quote/')}>Get a Quote</a></li>
+          <li><a href={url('contact/')}>Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h2>Contact</h2>
+        <ul>
+          <li><a href={company.phoneHref}>{company.phone}</a></li>
+          <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
+          <li><a href={links.maps} rel="noopener" target="_blank">{fullAddress}</a></li>
+          <li>{hours.office}</li>
+          <li>{hours.dispatch}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-legal">
+      <p>© {year} {company.legalName}</p>
+      <ul>
+        <li><a href={url('privacy-policy/')}>Privacy Policy</a></li>
+        <li><a href={url('terms-of-use/')}>Terms of Use</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

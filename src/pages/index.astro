@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroQuote from '../components/HeroQuote.astro';
+import RouteShield from '../components/RouteShield.astro';
+import Photo from '../components/Photo.astro';
+import { company, links, fullAddress, hours, services, quoteSteps, shipperReasons, driverBenefits, reviews } from '../data/site';
+import { url } from '../lib/url';
+
+const heroDesktop = [960, 1440, 1920].map((w) => `${url(`photos/hero-${w}.webp`)} ${w}w`).join(', ');
+const heroMobile = [600, 900].map((w) => `${url(`photos/hero-m-${w}.webp`)} ${w}w`).join(', ');
+---
+<Base
+  title="Good Idea Cargo | Freight trucking to all 48 states from Renton, WA"
+  description={`Full truckload, expedited and dedicated freight across the 48 contiguous states. Get a quote online or call ${company.phone}.`}
+  current="home"
+  preload={[
+    { srcset: heroMobile, sizes: '100vw', media: '(max-width: 899px)' },
+    { srcset: heroDesktop, sizes: '100vw', media: '(min-width: 900px)' },
+  ]}
+>
+  <section class="hero" aria-labelledby="hero-title">
+    <picture class="hero__photo">
+      <source media="(max-width: 899px)" srcset={heroMobile} sizes="100vw" />
+      <img src={url('photos/hero-1440.webp')} srcset={heroDesktop} sizes="100vw" width="1920" height="1080" alt="Two trucks heading west on Interstate 90 through Snoqualmie Pass, Washington" fetchpriority="high" decoding="async" />
+    </picture>
+    <div class="hero__sign-wrap">
+      <div class="hero__gantry" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="sign plate on-dark">
+          <div class="sign__shields">
+            <RouteShield route="5" />
+            <RouteShield route="90" />
+            <span class="sign__route">From {company.city}, {company.stateName}</span>
+          </div>
+          <h1 id="hero-title">Freight to all 48 states</h1>
+          <p class="sign__sub">Full truckloads, expedited runs and dedicated lanes, dispatched by a team that answers the phone.</p>
+          <div class="sign__actions">
+            <a class="btn btn--lg" href={url('quote/')}>Get a quote</a>
+            <a class="sign__phone" href={company.phoneHref}>or call {company.phone}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap qq-wrap">
+    <HeroQuote />
+  </div>
+
+  <section class="section" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="services-title">Three ways to ship with us</h2>
+        <p>Tell us the load and the deadline. We send the right truck.</p>
+      </div>
+      <ul class="services">
+        {services.map((s) => (
+          <li class="service">
+            <Photo name={s.photo} alt="" sizes="(min-width: 800px) 380px, 100vw" />
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+            <a class="text-link" href={url(`service/#${s.id}`)}>About {s.title.toLowerCase()}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--soft" aria-labelledby="steps-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="steps-title">From request to pickup</h2>
+        <p>Four steps. You can start online or by phone.</p>
+      </div>
+      <ol class="steps">
+        {quoteSteps.map((s) => <li><div><h3>{s.title}</h3><p>{s.body}</p></div></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="trust-title">
+    <div class="wrap trust">
+      <div>
+        <div class="section-head">
+          <h2 id="trust-title">Who you are booking with</h2>
+          <p>A trucking company with a real office and people you can call.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>Company</dt><dd>{company.legalName}</dd></div>
+          {company.dot && <div><dt>USDOT</dt><dd>{links.fmcsa ? <a href={links.fmcsa} target="_blank" rel="noopener">{company.dot}</a> : company.dot}</dd></div>}
+          {company.mc && <div><dt>MC</dt><dd>{company.mc}</dd></div>}
+          <div><dt>Office</dt><dd><a href={links.maps} target="_blank" rel="noopener">{fullAddress}</a></dd></div>
+          <div><dt>Phone</dt><dd><a href={company.phoneHref}>{company.phone}</a></dd></div>
+          <div><dt>Hours</dt><dd>{hours.office}<br />{hours.dispatch}</dd></div>
+        </dl>
+      </div>
+      <ul class="reasons">
+        {shipperReasons.map((r) => <li><h3>{r.title}</h3><p>{r.body}</p></li>)}
+      </ul>
+    </div>
+    {reviews.length > 0 && (
+      <div class="wrap">
+        <ul class="quotes">
+          {reviews.map((r) => <li><blockquote><p>{r.quote}</p><footer>{r.name}, {r.role}</footer></blockquote></li>)}
+        </ul>
+      </div>
+    )}
+  </section>
+
+  <section class="section section--soft" aria-labelledby="drive-title">
+    <div class="wrap split">
+      <Photo name="band-drive" widths={[800, 1440]} sizes="(min-width: 900px) 560px, 100vw" width={1440} height={810} alt="A driver's view of Interstate 90 near Keechelus Lake, Washington" />
+      <div class="split__copy">
+        <h2 id="drive-title">Drive with us</h2>
+        <p>Owner-operators and company drivers: steady lanes, weekly pay and dispatch that has your back.</p>
+        <ul class="checks">
+          {driverBenefits.slice(0, 3).map((b) => <li>{b.title}</li>)}
+        </ul>
+        <p><a class="text-link" href={url('drive-with-us/')}>See driver benefits and apply</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--green on-dark" aria-labelledby="cta-title">
+    <div class="wrap cta">
+      <h2 id="cta-title">Have a load this week?</h2>
+      <div class="cta__actions">
+        <a class="btn btn--lg" href={url('quote/')}>Get a quote</a>
+        <a class="text-link" href={company.phoneHref}>Call {company.phone}</a>
+      </div>
+    </div>
+  </section>
+</Base>

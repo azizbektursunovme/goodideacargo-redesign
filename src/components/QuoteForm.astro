@@ -1,0 +1,127 @@
+---
+// Shipper quote request: the lead the Meta campaign is built around.
+// Sends JSON to PUBLIC_QUOTE_ENDPOINT through LeadForm; "sent" only after the server answers 2xx.
+import LeadForm from './LeadForm.astro';
+import Icon from './Icon.astro';
+import { serviceOptions, freightOptions } from '../data/site';
+
+const endpoint = import.meta.env.PUBLIC_QUOTE_ENDPOINT ?? '';
+---
+<LeadForm
+  id="quote-form"
+  title="Quote request form"
+  endpoint={endpoint}
+  source="website-quote"
+  submitLabel="Send quote request"
+  sendingLabel="Sending quote request…"
+  successTitle="Quote request sent"
+  successText="Thank you. We review the lane and send you a rate by phone or email."
+  replyNote="No obligation. We reply by phone or email."
+>
+  <fieldset class="step" id="shipment" aria-labelledby="q-step-1">
+    <div class="step__head">
+      <span class="step__num" aria-hidden="true">1</span>
+      <div>
+        <h3 class="step__title" id="q-step-1">Shipment</h3>
+        <p class="step__hint">Where it goes, when, and what it is.</p>
+      </div>
+    </div>
+    <div class="form-grid form-grid--2">
+      <div class="field">
+        <label class="label" for="q-pickup">Pickup city or ZIP</label>
+        <div class="input-wrap"><Icon name="origin" /><input class="input" id="q-pickup" name="pickup" required autocomplete="off" placeholder="Renton, WA 98057" data-msg="Enter the pickup city or ZIP code." aria-describedby="q-pickup-err" /></div>
+        <p class="field-error" id="q-pickup-err"></p>
+      </div>
+      <div class="field">
+        <label class="label" for="q-delivery">Delivery city or ZIP</label>
+        <div class="input-wrap"><Icon name="pin" /><input class="input" id="q-delivery" name="delivery" required autocomplete="off" placeholder="Phoenix, AZ 85001" data-msg="Enter the delivery city or ZIP code." aria-describedby="q-delivery-err" /></div>
+        <p class="field-error" id="q-delivery-err"></p>
+      </div>
+      <div class="field">
+        <label class="label" for="q-date">Pickup date</label>
+        <input class="input" id="q-date" name="pickupDate" type="date" required data-msg="Choose a pickup date from today on." aria-describedby="q-date-err" />
+        <p class="field-error" id="q-date-err"></p>
+      </div>
+      <div class="field">
+        <label class="label" for="q-service">Service</label>
+        <select class="input" id="q-service" name="service" required data-msg='Choose a service, or "Not sure yet".' aria-describedby="q-service-err">
+          <option value="">Choose a service</option>
+          {serviceOptions.map((s) => <option>{s}</option>)}
+        </select>
+        <p class="field-error" id="q-service-err"></p>
+      </div>
+      <div class="field">
+        <label class="label" for="q-freight">Freight type</label>
+        <select class="input" id="q-freight" name="freightType" required data-msg="Choose the freight type." aria-describedby="q-freight-err">
+          <option value="">Choose a freight type</option>
+          {freightOptions.map((s) => <option>{s}</option>)}
+        </select>
+        <p class="field-error" id="q-freight-err"></p>
+      </div>
+      <div class="field">
+        <label class="label" for="q-weight">Estimated weight <span class="opt">(optional)</span></label>
+        <div class="input-wrap input-wrap--suffix"><Icon name="weight" /><input class="input" id="q-weight" name="weightLbs" type="number" inputmode="numeric" min="1" max="80000" placeholder="40000" data-msg="Enter the weight in pounds, up to 80,000." aria-describedby="q-weight-err" /><span class="suffix">lbs</span></div>
+        <p class="field-error" id="q-weight-err"></p>
+      </div>
+      <div class="field span-2">
+        <label class="label" for="q-notes">Notes <span class="opt">(optional)</span></label>
+        <div class="input-wrap input-wrap--top"><Icon name="note" /><textarea class="input" id="q-notes" name="notes" rows="3" placeholder="Pallet count, dock hours, appointment, recurring lane"></textarea></div>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="step" aria-labelledby="q-step-2">
+    <div class="step__head">
+      <span class="step__num" aria-hidden="true">2</span>
+      <div>
+        <h3 class="step__title" id="q-step-2">Your contact details</h3>
+        <p class="step__hint">Where we send the rate.</p>
+      </div>
+    </div>
+    <div class="form-grid form-grid--2">
+      <div class="field">
+        <label class="label" for="q-name">Full name</label>
+        <div class="input-wrap"><Icon name="user" /><input class="input" id="q-name" name="name" autocomplete="name" required minlength="2" data-msg="Enter your full name." aria-describedby="q-name-err" /></div>
+        <p class="field-error" id="q-name-err"></p>
+      </div>
+      <div class="field">
+        <label class="label" for="q-company">Company <span class="opt">(optional)</span></label>
+        <div class="input-wrap"><Icon name="building" /><input class="input" id="q-company" name="company" autocomplete="organization" /></div>
+      </div>
+      <div class="field">
+        <label class="label" for="q-email">Email</label>
+        <div class="input-wrap"><Icon name="mail" /><input class="input" id="q-email" name="email" type="email" autocomplete="email" required placeholder="name@company.com" data-msg="Enter an email address like name@company.com." aria-describedby="q-email-err" /></div>
+        <p class="field-error" id="q-email-err"></p>
+      </div>
+      <div class="field">
+        <label class="label" for="q-phone">Phone</label>
+        <div class="input-wrap"><Icon name="phone" /><input class="input" id="q-phone" name="phone" type="tel" autocomplete="tel" required pattern="[0-9()+.\s-]{10,20}" placeholder="(206) 555-0100" data-msg="Enter a phone number with area code." aria-describedby="q-phone-err" /></div>
+        <p class="field-error" id="q-phone-err"></p>
+      </div>
+      <div class="field span-2 consents">
+        <label class="consent"><input type="checkbox" name="smsConsent" value="yes" /><span>Text me about this quote <span class="opt">(optional)</span>. Good Idea Cargo may send text messages about your request and shipment. Message frequency varies; message and data rates may apply. Reply STOP to opt out, HELP for help. Consent is not required to get a quote.</span></label>
+      </div>
+    </div>
+  </fieldset>
+</LeadForm>
+
+<script>
+  // Pickup date from today; lane prefilled from the home page quick form (never personal data from the URL).
+  const date = document.getElementById('q-date') as HTMLInputElement | null;
+  if (date) {
+    const now = new Date();
+    date.min = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+    let draft: Record<string, string> = {};
+    try {
+      draft = JSON.parse(sessionStorage.getItem('gicQuoteDraft') || '{}');
+      sessionStorage.removeItem('gicQuoteDraft');
+    } catch { /* storage blocked */ }
+    const params = new URLSearchParams(location.search);
+    const set = (id: string, key: string) => {
+      const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null;
+      const v = draft[key] || params.get(key) || '';
+      if (el && v && (el.tagName !== 'SELECT' || Array.from((el as HTMLSelectElement).options).some((o) => o.value === v))) el.value = v;
+    };
+    set('q-pickup', 'pickup'); set('q-delivery', 'delivery'); set('q-date', 'pickupDate'); set('q-service', 'service');
+  }
+</script>

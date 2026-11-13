@@ -1,0 +1,48 @@
+---
+// Fleet page (URL /trucking/ kept from the old site). The truck list fills from src/data/site.ts → fleet;
+// while it is empty the page says so plainly instead of "0 trucks active" or "Loading...".
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import Photo from '../components/Photo.astro';
+import { company, fleet, fleetStandards } from '../data/site';
+import { url } from '../lib/url';
+---
+<Base
+  title="Our fleet | Good Idea Cargo"
+  description="The trucks behind Good Idea Cargo: inspected, maintained and tracked on the road, ready for full truckload and expedited freight."
+  current="fleet"
+>
+  <PageHead photo="band-fleet" title="Our fleet" lede="A focused fleet kept ready for daily freight work." />
+
+  <section class="section" aria-labelledby="standards-title">
+    <div class="wrap split">
+      <Photo name="fleet-cab" widths={[480, 800, 1200]} sizes="(min-width: 900px) 560px, 100vw" alt="Green Freightliner tractor in North Bend, Washington" />
+      <div class="split__copy">
+        <h2 id="standards-title">What every truck has</h2>
+        <ul class="reasons">
+          {fleetStandards.map((f) => <li><h3>{f.title}</h3><p>{f.body}</p></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft" aria-labelledby="units-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="units-title">Equipment</h2>
+      </div>
+      {fleet.length > 0 ? (
+        <dl class="facts">
+          {fleet.map((t) => <div><dt>Unit {t.unit}</dt><dd>{t.tractor}{t.year && <>, {t.year}</>}, {t.trailer}</dd></div>)}
+        </dl>
+      ) : (
+        <div class="fallback">
+          <h3>Checking a truck for your lane?</h3>
+          <p>Our equipment list is being updated. Call dispatch and we will tell you which truck fits your load and date.</p>
+          <p><a class="btn" href={url('quote/')}>Get a quote</a></p>
+          <p><a class="text-link" href={company.phoneHref}>Call {company.phone}</a></p>
+        </div>
+      )}
+    </div>
+  </section>
+</Base>
